@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mail & Guardian Newsletter Signup</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .wrapper {
+    width: 100%;
+    background: #eb4640; /* matches M&G accent red */
+    padding: 48px 24px;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  .brand {
+    color: #111;
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0 0 4px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .tagline {
+    color: rgba(17, 17, 17, 0.65);
+    font-size: 15px;
+    margin: 0 0 28px 0;
+    font-weight: 500;
+  }
+
+  /* Beehiiv injects its own form UI once loader.js runs.
+     This container just gives it a consistent max-width and spacing. */
+  #beehiiv-form-container {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .fallback-note {
+    color: rgba(17, 17, 17, 0.5);
+    font-size: 12px;
+    margin-top: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <p class="brand">Mail &amp; Guardian</p>
+  <p class="tagline">Africa's Better Future</p>
+
+  <div id="beehiiv-form-container">
+    <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="0c4bdca5-4a76-4259-9f59-b469ec532313"></script>
+  </div>
+</div>
+
+<script>
+  // Optional: resize the parent iframe automatically to fit content height.
+  // Works if your CMS's iframe embed respects postMessage resize requests.
+  function sendHeight() {
+    var height = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'newsletter-embed-height', height: height }, '*');
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  // Beehiiv's form may load slightly after page load, so check again shortly after.
+  setTimeout(sendHeight, 1000);
+  setTimeout(sendHeight, 2500);
+</script>
+
+</body>
+</html>
